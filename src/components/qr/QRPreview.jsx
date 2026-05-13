@@ -1,39 +1,32 @@
-import { useEffect, useRef, useState } from 'react';
-import QRCode from 'qrcode';
+import { useEffect, useState, useRef } from 'react';
+import { getQRMatrix, renderQRSVG } from '../../lib/qrRenderer';
+import { QrCode } from 'lucide-react';
 
 export default function QRPreview({ value, style, compact = false }) {
-  const canvasRef = useRef(null);
+  const [svgContent, setSvgContent] = useState('');
   const [error, setError] = useState(null);
 
+  const displaySize = compact ? 140 : (style?.size || 260);
+
   useEffect(() => {
-    if (!canvasRef.current || !value) return;
+    if (!value) { setSvgContent(''); return; }
     setError(null);
-    QRCode.toCanvas(canvasRef.current, value, {
-      width: style?.size || 260,
-      margin: 2,
-      color: {
-        dark: style?.fg || '#a78bfa',
-        light: style?.bg || '#0d0d1a',
-      },
-      errorCorrectionLevel: style?.errorLevel || 'M',
-    }).catch(err => setError(err.message));
-  }, [value, style]);
+    getQRMatrix(value, style?.errorLevel || 'M')
+      .then(matrix => {
+        const svg = renderQRSVG(matrix, displaySize, style || {});
+        setSvgContent(svg);
+      })
+      .catch(err => setError(err.message));
+  }, [value, style, displaySize]);
 
   if (!value) {
     return (
       <div
         className="flex items-center justify-center rounded-2xl border border-white/10 bg-white/3"
-        style={{ width: compact ? 160 : style?.size || 260, height: compact ? 160 : style?.size || 260 }}
+        style={{ width: displaySize, height: displaySize }}
       >
         <div className="text-center">
-          <div className="w-10 h-10 mx-auto mb-2 opacity-20">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-              <rect x={3} y={3} width={8} height={8} rx={1} />
-              <rect x={13} y={3} width={8} height={8} rx={1} />
-              <rect x={3} y={13} width={8} height={8} rx={1} />
-              <rect x={13} y={13} width={8} height={8} rx={1} />
-            </svg>
-          </div>
+          <QrCode className="w-8 h-8 mx-auto mb-2 text-white/20" />
           <p className="text-xs text-muted-foreground">Aperçu</p>
         </div>
       </div>
@@ -41,20 +34,14 @@ export default function QRPreview({ value, style, compact = false }) {
   }
 
   if (error) {
-    return (
-      <div className="flex items-center justify-center text-destructive text-sm p-4">
-        Erreur: {error}
-      </div>
-    );
+    return <div className="text-destructive text-xs p-2">Erreur: {error}</div>;
   }
 
   return (
-    <div className="flex items-center justify-center">
-      <canvas
-        ref={canvasRef}
-        className="rounded-xl"
-        style={compact ? { width: 160, height: 160 } : {}}
-      />
-    </div>
+    <div
+      className="rounded-xl overflow-hidden"
+      style={{ width: displaySize, height: displaySize }}
+      dangerouslySetInnerHTML={{ __html: svgContent }}
+    />
   );
 }

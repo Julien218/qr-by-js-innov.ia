@@ -53,6 +53,9 @@ export default function Create() {
     bg: '#0d0d1a',
     size: 280,
     errorLevel: 'M',
+    pixelShape: 'rounded',
+    cornerShape: 'rounded',
+    gradient: { type: 'linear', color1: '#a78bfa', color2: '#22d3ee', angle: 135 },
   });
 
   const qrValue = useMemo(() => buildQRValue(type, data), [type, data]);
