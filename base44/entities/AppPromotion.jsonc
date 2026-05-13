@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "promoUrl": {
+      "type": "string",
+      "description": "L'URL de destination pour la promotion."
+    },
+    "bannerText": {
+      "type": "string",
+      "description": "Le texte affich\u00e9 sur la banni\u00e8re promotionnelle."
+    },
+    "isActive": {
+      "type": "boolean",
+      "description": "Indique si la banni\u00e8re promotionnelle est active.",
+      "default": false
+    }
+  },
+  "required": [
+    "promoUrl",
+    "bannerText",
+    "isActive"
+  ],
+  "name": "AppPromotion"
+}

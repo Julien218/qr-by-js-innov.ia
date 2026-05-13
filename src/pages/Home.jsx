@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Globe, Wifi, User, MessageSquare, Mail, ArrowRight, Zap, Palette, Download, Sparkles, QrCode } from 'lucide-react';
 import IntroAnimation from '../components/IntroAnimation';
+import PromotionBanner from '../components/PromotionBanner';
 
 const features = [
   { icon: Zap, title: "Génération instantanée", desc: "Votre QR code apparaît en temps réel pendant que vous tapez" },
@@ -162,6 +163,8 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <PromotionBanner />
 
       {/* Footer */}
       <footer className="relative z-10 border-t border-white/5 py-8 glass">
