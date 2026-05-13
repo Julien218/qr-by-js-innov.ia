@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import FrameLogoEditor from './FrameLogoEditor';
 
 const PRESETS = [
   { fg: '#a78bfa', bg: '#0d0d1a', label: 'Violet', gradient: { type: 'linear', color1: '#a78bfa', color2: '#22d3ee', angle: 135 } },
@@ -39,9 +40,12 @@ export default function QRCustomizer({ style, onChange }) {
   return (
     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }}>
       <h2 className="text-2xl md:text-3xl font-grotesk font-bold text-white mb-2">Personnalisez le style</h2>
-      <p className="text-muted-foreground mb-8">Forme des pixels, coins, couleurs et dégradés</p>
+      <p className="text-muted-foreground mb-8">Cadre, logo, pixels, couleurs et dégradés</p>
 
       <div className="space-y-8 max-w-xl">
+        {/* Frame & Logo */}
+        <FrameLogoEditor style={style} onChange={onChange} />
+        <div className="h-px bg-white/8" />
 
         {/* Pixel shapes */}
         <div>
