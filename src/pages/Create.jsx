@@ -1,7 +1,8 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, QrCode, RefreshCw } from 'lucide-react';
+import { getBrandLogoDataUrl, BRAND_LOGO_CONFIG } from '../lib/brandLogo';
 import StepIndicator from '../components/qr/StepIndicator';
 import TypeSelector from '../components/qr/TypeSelector';
 import ContentForm from '../components/qr/ContentForm';
@@ -48,15 +49,26 @@ export default function Create() {
   const [step, setStep] = useState(initialType ? 2 : 1);
   const [type, setType] = useState(initialType);
   const [data, setData] = useState({});
+  const [brandLogoUrl, setBrandLogoUrl] = useState(null);
   const [qrStyle, setQrStyle] = useState({
     fg: '#a78bfa',
     bg: '#0d0d1a',
     size: 280,
-    errorLevel: 'M',
+    errorLevel: 'H',
     pixelShape: 'rounded',
     cornerShape: 'rounded',
     gradient: { type: 'linear', color1: '#a78bfa', color2: '#22d3ee', angle: 135 },
   });
+
+  useEffect(() => {
+    getBrandLogoDataUrl().then(url => setBrandLogoUrl(url));
+  }, []);
+
+  // Always inject brand logo
+  const qrStyleWithLogo = useMemo(() => ({
+    ...qrStyle,
+    logo: brandLogoUrl ? { ...BRAND_LOGO_CONFIG, dataUrl: brandLogoUrl } : null,
+  }), [qrStyle, brandLogoUrl]);
 
   const qrValue = useMemo(() => buildQRValue(type, data), [type, data]);
 
@@ -133,12 +145,12 @@ export default function Create() {
               )}
               {step === 3 && (
                 <motion.div key="step3" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                  <QRCustomizer style={qrStyle} onChange={setQrStyle} />
+                  <QRCustomizer style={qrStyleWithLogo} onChange={setQrStyle} />
                 </motion.div>
               )}
               {step === 4 && (
                 <motion.div key="step4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                  <DownloadStep value={qrValue} style={qrStyle} />
+                  <DownloadStep value={qrValue} style={qrStyleWithLogo} />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -197,9 +209,9 @@ export default function Create() {
                       <div className="absolute top-3 left-1/2 -translate-x-1/2 w-16 h-4 bg-[#222] rounded-full z-10" />
                       {/* Screen */}
                       <div className="absolute inset-2 top-10 rounded-[1.5rem] overflow-hidden flex flex-col items-center justify-center p-3"
-                        style={{ background: qrStyle.bg || '#0d0d1a' }}>
+                        style={{ background: qrStyleWithLogo.bg || '#0d0d1a' }}>
                         {qrValue ? (
-                          <QRPreview value={qrValue} style={{ ...qrStyle, size: 130 }} compact />
+                          <QRPreview value={qrValue} style={{ ...qrStyleWithLogo, size: 130 }} compact />
                         ) : (
                           <div className="w-24 h-24 rounded-xl border-2 border-dashed border-white/15 flex items-center justify-center">
                             <QrCode className="w-8 h-8 text-white/20" />
@@ -223,15 +235,15 @@ export default function Create() {
                   </div>
                   <div className="flex items-center justify-between text-xs">
                     <span className="text-muted-foreground">Taille</span>
-                    <span className="text-white font-medium">{qrStyle.size}px</span>
+                    <span className="text-white font-medium">{qrStyleWithLogo.size}px</span>
                   </div>
                   <div className="flex items-center justify-between text-xs">
                     <span className="text-muted-foreground">Correction</span>
-                    <span className="text-white font-medium">{qrStyle.errorLevel}</span>
+                    <span className="text-white font-medium">{qrStyleWithLogo.errorLevel}</span>
                   </div>
                   <div className="flex items-center gap-2 pt-1">
-                    <div className="w-4 h-4 rounded-full border border-white/15" style={{ background: qrStyle.fg }} />
-                    <div className="w-4 h-4 rounded-full border border-white/15" style={{ background: qrStyle.bg }} />
+                    <div className="w-4 h-4 rounded-full border border-white/15" style={{ background: qrStyleWithLogo.fg }} />
+                    <div className="w-4 h-4 rounded-full border border-white/15" style={{ background: qrStyleWithLogo.bg }} />
                     <span className="text-xs text-muted-foreground">Couleurs</span>
                   </div>
                 </div>
