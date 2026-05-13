@@ -1,8 +1,7 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, QrCode, RefreshCw } from 'lucide-react';
-import { getBrandLogoDataUrl, BRAND_LOGO_CONFIG } from '../lib/brandLogo';
 import StepIndicator from '../components/qr/StepIndicator';
 import TypeSelector from '../components/qr/TypeSelector';
 import ContentForm from '../components/qr/ContentForm';
@@ -49,7 +48,6 @@ export default function Create() {
   const [step, setStep] = useState(initialType ? 2 : 1);
   const [type, setType] = useState(initialType);
   const [data, setData] = useState({});
-  const [brandLogoUrl, setBrandLogoUrl] = useState(null);
   const [qrStyle, setQrStyle] = useState({
     fg: '#a78bfa',
     bg: '#0d0d1a',
@@ -60,15 +58,7 @@ export default function Create() {
     gradient: { type: 'linear', color1: '#a78bfa', color2: '#22d3ee', angle: 135 },
   });
 
-  useEffect(() => {
-    getBrandLogoDataUrl().then(url => setBrandLogoUrl(url));
-  }, []);
-
-  // Always inject brand logo
-  const qrStyleWithLogo = useMemo(() => ({
-    ...qrStyle,
-    logo: brandLogoUrl ? { ...BRAND_LOGO_CONFIG, dataUrl: brandLogoUrl } : null,
-  }), [qrStyle, brandLogoUrl]);
+  const qrStyleWithLogo = qrStyle;
 
   const qrValue = useMemo(() => buildQRValue(type, data), [type, data]);
 
