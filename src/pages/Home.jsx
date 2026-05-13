@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Globe, Wifi, User, MessageSquare, Mail, ArrowRight, Zap, Palette, Download, Sparkles, QrCode } from 'lucide-react';
+import IntroAnimation from '../components/IntroAnimation';
 
 const features = [
   { icon: Zap, title: "Génération instantanée", desc: "Votre QR code apparaît en temps réel pendant que vous tapez" },
@@ -18,8 +20,11 @@ const qrTypes = [
 ];
 
 export default function Home() {
+  const [introDone, setIntroDone] = useState(false);
+
   return (
     <div className="min-h-screen bg-background grid-bg overflow-hidden">
+      {!introDone && <IntroAnimation onComplete={() => setIntroDone(true)} />}
       {/* Ambient blobs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-violet-600/10 blur-[120px]" />
