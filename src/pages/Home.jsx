@@ -170,7 +170,18 @@ export default function Home() {
       <footer className="relative z-10 border-t border-white/5 py-8 glass">
         <div className="flex flex-col items-center gap-2 text-muted-foreground text-sm">
           <img src="https://media.base44.com/images/public/6a0448473bebffcc3578f3b8/c0c2ff82c_logo-phoenix-128.png" alt="JS-Innov.IA" className="w-10 h-10 object-contain opacity-70" />
-          <p>© 2026 <span className="text-white/70">JS-Innov.IA</span> — QRStudio by Julien P@gin</p>
+          <p>© 2026 <span className="text-white/70">JS-Innov.IA</span> — QR Studio by <span className="gradient-text font-semibold">Js-Innov.IA</span></p>
+          <a
+            href="https://www.jsinnovia.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-muted-foreground hover:text-violet-400 transition-colors underline underline-offset-4 decoration-white/20 hover:decoration-violet-400"
+          >
+            www.jsinnovia.com
+          </a>
+          <div className="flex items-center gap-2 mt-1 px-4 py-1.5 rounded-full glass border border-violet-500/20 text-xs text-violet-300/70">
+            ✦ Propulsé par <span className="font-semibold text-violet-300">Js-Innov.IA</span> — Intelligence Artificielle & Innovation
+          </div>
         </div>
       </footer>
     </div>
