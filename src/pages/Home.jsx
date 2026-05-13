@@ -29,11 +29,9 @@ export default function Home() {
 
       {/* Nav */}
       <nav className="relative z-10 flex items-center justify-between px-6 md:px-12 py-5 glass border-b border-white/5">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center">
-            <QrCode className="w-4 h-4 text-white" />
-          </div>
-          <span className="font-grotesk font-700 text-white text-xl">QR<span className="gradient-text">Studio</span></span>
+        <div className="flex items-center gap-3">
+          <img src="https://media.base44.com/images/public/6a0448473bebffcc3578f3b8/c0c2ff82c_logo-phoenix-128.png" alt="JS-Innov.IA" className="w-9 h-9 object-contain" />
+          <span className="font-grotesk font-bold text-white text-xl">QR<span className="gradient-text">Studio</span></span>
         </div>
         <Link
           to="/create"
@@ -161,8 +159,11 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="relative z-10 border-t border-white/5 py-8 text-center text-muted-foreground text-sm glass">
-        <p>© 2026 QRStudio — Générateur de QR codes moderne</p>
+      <footer className="relative z-10 border-t border-white/5 py-8 glass">
+        <div className="flex flex-col items-center gap-2 text-muted-foreground text-sm">
+          <img src="https://media.base44.com/images/public/6a0448473bebffcc3578f3b8/c0c2ff82c_logo-phoenix-128.png" alt="JS-Innov.IA" className="w-10 h-10 object-contain opacity-70" />
+          <p>© 2026 <span className="text-white/70">JS-Innov.IA</span> — QRStudio by Julien P@gin</p>
+        </div>
       </footer>
     </div>
   );

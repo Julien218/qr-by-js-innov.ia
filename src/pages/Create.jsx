@@ -106,10 +106,8 @@ export default function Create() {
       <nav className="relative z-10 flex items-center justify-between px-6 md:px-12 py-5 glass border-b border-white/5">
         <Link to="/" className="flex items-center gap-2 group">
           <ArrowLeft className="w-4 h-4 text-muted-foreground group-hover:text-white transition-colors" />
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center">
-              <QrCode className="w-4 h-4 text-white" />
-            </div>
+          <div className="flex items-center gap-3">
+            <img src="https://media.base44.com/images/public/6a0448473bebffcc3578f3b8/c0c2ff82c_logo-phoenix-128.png" alt="JS-Innov.IA" className="w-9 h-9 object-contain" />
             <span className="font-grotesk font-bold text-white text-xl">QR<span className="gradient-text">Studio</span></span>
           </div>
         </Link>

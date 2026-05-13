@@ -1,5 +1,5 @@
 // Brand logo applied permanently to all QR codes - cannot be removed
-const LOGO_URL = 'https://media.base44.com/images/public/6a0448473bebffcc3578f3b8/445679379_logo-phoenix-512.png';
+const LOGO_URL = 'https://media.base44.com/images/public/6a0448473bebffcc3578f3b8/202e09753_logo-phoenix-512.png';
 
 let cachedDataUrl = null;
 
