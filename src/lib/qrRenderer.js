@@ -52,6 +52,35 @@ function drawPixel(x, y, cellSize, shape, color) {
       }
       return `<polygon points="${pts.join(' ')}" fill="${color}"/>`;
     }
+    case 'cross': {
+      const arm = ps * 0.35;
+      return `<rect x="${cx - arm / 2}" y="${y + gap}" width="${arm}" height="${ps}" rx="${arm * 0.4}" fill="${color}"/>
+<rect x="${x + gap}" y="${cy - arm / 2}" width="${ps}" height="${arm}" rx="${arm * 0.4}" fill="${color}"/>`;
+    }
+    case 'flower': {
+      const pr = ps * 0.28;
+      const offsets = [[0, -ps * 0.22], [0, ps * 0.22], [-ps * 0.22, 0], [ps * 0.22, 0]];
+      return offsets.map(([ox, oy]) =>
+        `<circle cx="${cx + ox}" cy="${cy + oy}" r="${pr}" fill="${color}"/>`
+      ).join('') + `<circle cx="${cx}" cy="${cy}" r="${pr * 0.85}" fill="${color}"/>`;
+    }
+    case 'hexagon': {
+      const hr = ps / 2;
+      const hpts = [];
+      for (let i = 0; i < 6; i++) {
+        const a = (i * Math.PI) / 3 - Math.PI / 6;
+        hpts.push(`${cx + hr * Math.cos(a)},${cy + hr * Math.sin(a)}`);
+      }
+      return `<polygon points="${hpts.join(' ')}" fill="${color}"/>`;
+    }
+    case 'random': {
+      // Deterministic "random" based on position
+      const seed = Math.round(x * 13 + y * 7) % 4;
+      if (seed === 0) return `<circle cx="${cx}" cy="${cy}" r="${ps / 2}" fill="${color}"/>`;
+      if (seed === 1) return `<rect x="${x + gap}" y="${y + gap}" width="${ps}" height="${ps}" rx="${ps * 0.3}" fill="${color}"/>`;
+      if (seed === 2) return `<polygon points="${cx},${y + gap} ${x + gap + ps},${cy} ${cx},${y + gap + ps} ${x + gap},${cy}" fill="${color}"/>`;
+      return `<rect x="${x + gap}" y="${y + gap}" width="${ps}" height="${ps}" fill="${color}"/>`;
+    }
     default:
       return `<rect x="${x + gap}" y="${y + gap}" width="${ps}" height="${ps}" fill="${color}"/>`;
   }

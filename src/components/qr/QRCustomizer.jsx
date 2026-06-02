@@ -2,29 +2,39 @@ import { motion } from 'framer-motion';
 import FrameLogoEditor from './FrameLogoEditor';
 
 const PRESETS = [
-  { fg: '#a78bfa', bg: '#0d0d1a', label: 'Violet', gradient: { type: 'linear', color1: '#a78bfa', color2: '#22d3ee', angle: 135 } },
-  { fg: '#22d3ee', bg: '#030f18', label: 'Cyan', gradient: { type: 'radial', color1: '#22d3ee', color2: '#6366f1' } },
-  { fg: '#f472b6', bg: '#1a0a12', label: 'Rose', gradient: { type: 'linear', color1: '#f472b6', color2: '#fb7185', angle: 90 } },
-  { fg: '#34d399', bg: '#011a0f', label: 'Vert', gradient: { type: 'linear', color1: '#34d399', color2: '#06b6d4', angle: 135 } },
-  { fg: '#fb923c', bg: '#1a0a00', label: 'Feu', gradient: { type: 'linear', color1: '#fb923c', color2: '#f472b6', angle: 45 } },
-  { fg: '#ffffff', bg: '#000000', label: 'Classic', gradient: null },
+  { fg: '#a78bfa', bg: '#0d0d1a', label: 'Violet',   gradient: { type: 'linear', color1: '#a78bfa', color2: '#22d3ee', angle: 135 } },
+  { fg: '#22d3ee', bg: '#030f18', label: 'Cyan',      gradient: { type: 'radial', color1: '#22d3ee', color2: '#6366f1' } },
+  { fg: '#f472b6', bg: '#1a0a12', label: 'Rose',      gradient: { type: 'linear', color1: '#f472b6', color2: '#fb7185', angle: 90 } },
+  { fg: '#34d399', bg: '#011a0f', label: 'Vert',      gradient: { type: 'linear', color1: '#34d399', color2: '#06b6d4', angle: 135 } },
+  { fg: '#fb923c', bg: '#1a0a00', label: 'Feu',       gradient: { type: 'linear', color1: '#fb923c', color2: '#f472b6', angle: 45 } },
+  { fg: '#ffffff', bg: '#000000', label: 'Classic',   gradient: null },
+  { fg: '#facc15', bg: '#0f0a00', label: 'Or',        gradient: { type: 'linear', color1: '#facc15', color2: '#fb923c', angle: 135 } },
+  { fg: '#e879f9', bg: '#0f0018', label: 'Magenta',   gradient: { type: 'radial', color1: '#e879f9', color2: '#6366f1' } },
+  { fg: '#4ade80', bg: '#001a06', label: 'Néon',      gradient: { type: 'linear', color1: '#4ade80', color2: '#22d3ee', angle: 90 } },
+  { fg: '#f87171', bg: '#1a0404', label: 'Rubis',     gradient: { type: 'linear', color1: '#f87171', color2: '#fbbf24', angle: 45 } },
+  { fg: '#94a3b8', bg: '#0a0a0f', label: 'Acier',     gradient: { type: 'linear', color1: '#94a3b8', color2: '#cbd5e1', angle: 135 } },
+  { fg: '#000000', bg: '#ffffff', label: 'Blanc',      gradient: null },
 ];
 
 const PIXEL_SHAPES = [
-  { id: 'square', label: 'Carré', preview: (c) => <rect x="2" y="2" width="16" height="16" fill={c} /> },
-  { id: 'rounded', label: 'Arrondi', preview: (c) => <rect x="2" y="2" width="16" height="16" rx="5" fill={c} /> },
-  { id: 'circle', label: 'Cercle', preview: (c) => <circle cx="10" cy="10" r="8" fill={c} /> },
-  { id: 'diamond', label: 'Diamant', preview: (c) => <polygon points="10,2 18,10 10,18 2,10" fill={c} /> },
-  { id: 'vertical', label: 'Vertical', preview: (c) => <rect x="7" y="1" width="6" height="18" rx="3" fill={c} /> },
+  { id: 'square',     label: 'Carré',      preview: (c) => <rect x="2" y="2" width="16" height="16" fill={c} /> },
+  { id: 'rounded',    label: 'Arrondi',    preview: (c) => <rect x="2" y="2" width="16" height="16" rx="5" fill={c} /> },
+  { id: 'circle',     label: 'Cercle',     preview: (c) => <circle cx="10" cy="10" r="8" fill={c} /> },
+  { id: 'diamond',    label: 'Diamant',    preview: (c) => <polygon points="10,2 18,10 10,18 2,10" fill={c} /> },
+  { id: 'vertical',   label: 'Vertical',   preview: (c) => <rect x="7" y="1" width="6" height="18" rx="3" fill={c} /> },
   { id: 'horizontal', label: 'Horizontal', preview: (c) => <rect x="1" y="7" width="18" height="6" rx="3" fill={c} /> },
-  { id: 'star', label: 'Étoile', preview: (c) => <polygon points="10,1 12,7 18,7 13.5,11 15,17 10,13.5 5,17 6.5,11 2,7 8,7" fill={c} /> },
+  { id: 'star',       label: 'Étoile',     preview: (c) => <polygon points="10,1 12,7 18,7 13.5,11 15,17 10,13.5 5,17 6.5,11 2,7 8,7" fill={c} /> },
+  { id: 'cross',      label: 'Croix',      preview: (c) => <><rect x="7" y="2" width="6" height="16" rx="2" fill={c}/><rect x="2" y="7" width="16" height="6" rx="2" fill={c}/></> },
+  { id: 'flower',     label: 'Fleur',      preview: (c) => <><circle cx="10" cy="5" r="3.5" fill={c}/><circle cx="10" cy="15" r="3.5" fill={c}/><circle cx="5" cy="10" r="3.5" fill={c}/><circle cx="15" cy="10" r="3.5" fill={c}/><circle cx="10" cy="10" r="3" fill={c}/></> },
+  { id: 'hexagon',    label: 'Hexagone',   preview: (c) => <polygon points="10,2 17,6 17,14 10,18 3,14 3,6" fill={c} /> },
+  { id: 'random',     label: 'Aléatoire',  preview: (c) => <><rect x="2" y="2" width="7" height="7" rx="3" fill={c}/><circle cx="15" cy="6" r="4" fill={c}/><polygon points="10,13 14,20 6,20" fill={c}/><rect x="13" y="12" width="6" height="6" fill={c}/></> },
 ];
 
 const CORNER_SHAPES = [
-  { id: 'square', label: 'Carré' },
-  { id: 'rounded', label: 'Arrondi' },
-  { id: 'circle', label: 'Cercle' },
-  { id: 'mixed', label: 'Mixte' },
+  { id: 'square',  label: 'Carré',   preview: (c) => <><rect x="1" y="1" width="18" height="18" fill={c}/><rect x="4" y="4" width="12" height="12" fill="hsl(240 8% 8%)"/><rect x="6" y="6" width="8" height="8" fill={c}/></> },
+  { id: 'rounded', label: 'Arrondi', preview: (c) => <><rect x="1" y="1" width="18" height="18" rx="5" fill={c}/><rect x="4" y="4" width="12" height="12" rx="3" fill="hsl(240 8% 8%)"/><rect x="6" y="6" width="8" height="8" rx="2" fill={c}/></> },
+  { id: 'circle',  label: 'Cercle',  preview: (c) => <><circle cx="10" cy="10" r="9" fill={c}/><circle cx="10" cy="10" r="6" fill="hsl(240 8% 8%)"/><circle cx="10" cy="10" r="3.5" fill={c}/></> },
+  { id: 'mixed',   label: 'Mixte',   preview: (c) => <><rect x="1" y="1" width="18" height="18" rx="5" fill={c}/><rect x="4" y="4" width="12" height="12" rx="1" fill="hsl(240 8% 8%)"/><circle cx="10" cy="10" r="3.5" fill={c}/></> },
 ];
 
 const SIZES = [
@@ -50,7 +60,7 @@ export default function QRCustomizer({ style, onChange }) {
         {/* Pixel shapes */}
         <div>
           <label className="block text-sm font-medium text-white/80 mb-3">Forme des pixels</label>
-          <div className="grid grid-cols-4 gap-2 sm:grid-cols-7">
+          <div className="grid grid-cols-4 gap-2 sm:grid-cols-6 lg:grid-cols-11">
             {PIXEL_SHAPES.map(shape => (
               <button
                 key={shape.id}
@@ -78,13 +88,16 @@ export default function QRCustomizer({ style, onChange }) {
               <button
                 key={shape.id}
                 onClick={() => set('cornerShape', shape.id)}
-                className={`px-4 py-2 rounded-xl border text-sm font-medium transition-all duration-200
+                className={`flex flex-col items-center gap-1.5 p-2.5 rounded-xl border transition-all duration-200
                   ${style.cornerShape === shape.id
                     ? 'border-cyan-500/50 bg-cyan-500/15 text-cyan-300'
                     : 'border-white/8 bg-white/3 text-muted-foreground hover:border-white/20 hover:text-white'
                   }`}
               >
-                {shape.label}
+                <svg viewBox="0 0 20 20" className="w-8 h-8">
+                  {shape.preview(style.cornerShape === shape.id ? '#22d3ee' : '#6b7280')}
+                </svg>
+                <span className="text-[10px] font-medium">{shape.label}</span>
               </button>
             ))}
           </div>
@@ -93,21 +106,27 @@ export default function QRCustomizer({ style, onChange }) {
         {/* Color presets */}
         <div>
           <label className="block text-sm font-medium text-white/80 mb-3">Thèmes de couleur</label>
-          <div className="flex flex-wrap gap-2">
+          <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
             {PRESETS.map(preset => {
               const isActive = style.fg === preset.fg && style.bg === preset.bg;
               return (
                 <button
                   key={preset.label}
                   onClick={() => onChange({ ...style, fg: preset.fg, bg: preset.bg, gradient: preset.gradient })}
-                  className={`flex items-center gap-2 px-3.5 py-2 rounded-xl border transition-all duration-200 text-sm font-medium
-                    ${isActive ? 'border-violet-500/50 bg-white/8 text-white' : 'border-white/8 bg-white/3 text-muted-foreground hover:border-white/20 hover:text-white'}`}
+                  title={preset.label}
+                  className={`flex flex-col items-center gap-1.5 p-2 rounded-xl border transition-all duration-200
+                    ${isActive ? 'border-violet-500/50 bg-white/8 text-white scale-105' : 'border-white/8 bg-white/3 text-muted-foreground hover:border-white/20 hover:text-white'}`}
                 >
-                  <span className="flex gap-1">
-                    <span className="w-4 h-4 rounded-full border border-white/15" style={{ background: preset.gradient ? `linear-gradient(135deg, ${preset.gradient.color1}, ${preset.gradient.color2 || preset.gradient.color1})` : preset.fg }} />
-                    <span className="w-4 h-4 rounded-full border border-white/15" style={{ background: preset.bg }} />
-                  </span>
-                  {preset.label}
+                  <div className="w-10 h-10 rounded-lg border border-white/10 overflow-hidden relative">
+                    <div className="absolute inset-0" style={{ background: preset.bg }} />
+                    <div className="absolute inset-1 rounded" style={{
+                      background: preset.gradient
+                        ? `linear-gradient(135deg, ${preset.gradient.color1}, ${preset.gradient.color2 || preset.gradient.color1})`
+                        : preset.fg,
+                      opacity: 0.85
+                    }} />
+                  </div>
+                  <span className="text-[10px] font-medium leading-tight">{preset.label}</span>
                 </button>
               );
             })}
