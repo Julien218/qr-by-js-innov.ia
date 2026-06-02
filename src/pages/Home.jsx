@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Globe, Wifi, User, MessageSquare, Mail, ArrowRight, Zap, Palette, Download, Sparkles, QrCode } from 'lucide-react';
+import { Globe, Wifi, User, MessageSquare, Mail, ArrowRight, Zap, Palette, Download, Sparkles, QrCode, BarChart3 } from 'lucide-react';
 import IntroAnimation from '../components/IntroAnimation';
 import PromotionBanner from '../components/PromotionBanner';
 
@@ -39,12 +39,20 @@ export default function Home() {
           <img src="https://media.base44.com/images/public/6a0448473bebffcc3578f3b8/c0c2ff82c_logo-phoenix-128.png" alt="JS-Innov.IA" className="w-9 h-9 object-contain" />
           <span className="font-grotesk font-bold text-white text-xl">QR<span className="gradient-text">Studio</span></span>
         </div>
-        <Link
-          to="/create"
-          className="flex items-center gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-300 shadow-lg shadow-violet-500/25"
-        >
-          Créer un QR code <ArrowRight className="w-4 h-4" />
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link
+            to="/dashboard"
+            className="flex items-center gap-2 glass border border-white/10 hover:border-violet-500/30 text-muted-foreground hover:text-white px-4 py-2.5 rounded-xl font-medium text-sm transition-all"
+          >
+            <BarChart3 className="w-4 h-4" /> Stats
+          </Link>
+          <Link
+            to="/create"
+            className="flex items-center gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-300 shadow-lg shadow-violet-500/25"
+          >
+            Créer un QR code <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
       </nav>
 
       {/* Hero */}

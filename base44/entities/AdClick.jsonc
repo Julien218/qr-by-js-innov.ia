@@ -1,0 +1,29 @@
+{
+  "name": "AdClick",
+  "type": "object",
+  "properties": {
+    "ad_name": {
+      "type": "string",
+      "description": "Nom de la publicit\u00e9 ou banni\u00e8re cliqu\u00e9e"
+    },
+    "ad_url": {
+      "type": "string",
+      "description": "URL de destination de la publicit\u00e9"
+    },
+    "page": {
+      "type": "string",
+      "description": "Page depuis laquelle le clic a \u00e9t\u00e9 effectu\u00e9"
+    },
+    "user_agent": {
+      "type": "string",
+      "description": "User agent du navigateur"
+    },
+    "referrer": {
+      "type": "string",
+      "description": "URL de r\u00e9f\u00e9rence"
+    }
+  },
+  "required": [
+    "ad_name"
+  ]
+}
