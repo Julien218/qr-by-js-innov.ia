@@ -1,4 +1,4 @@
-// Brand logo applied permanently to all QR codes - cannot be removed
+// Brand logo JS-Innov.IA — toujours présent sur les QR codes
 const LOGO_URL = 'https://media.base44.com/images/public/6a0448473bebffcc3578f3b8/202e09753_logo-phoenix-512.png';
 
 let cachedDataUrl = null;
@@ -17,7 +17,6 @@ export async function getBrandLogoDataUrl() {
       reader.readAsDataURL(blob);
     });
   } catch {
-    // fallback to direct URL if fetch fails
     return LOGO_URL;
   }
 }
