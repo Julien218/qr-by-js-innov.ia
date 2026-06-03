@@ -1,2 +1,9 @@
-// Stub — Base44 SDK removed in standalone mode
-export const base44 = {};
+// Standalone mode — aucune connexion Base44
+export const base44 = {
+  entities: {
+    AdClick: {
+      list: async () => [],
+      create: async () => null,
+    }
+  }
+};
