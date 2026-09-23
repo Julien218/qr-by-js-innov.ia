@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0",
+  "brand": "QR by JS-Innov.IA",
+  "status": "production",
+  "locale": "fr-BE",
+  "lastAligned": "2026-09-23",
+  "repository": {
+    "fullName": "Julien218/qr-by-js-innov.ia",
+    "productionBranch": "main"
+  },
+  "canonicalSources": {
+    "bible": "brand/BRAND_ADN.md",
+    "runtimeStyles": "src/index.css",
+    "brandLogo": "src/lib/brandLogo.js"
+  },
+  "identity": {
+    "name": "QR by JS-Innov.IA",
+    "parentBrand": "JS-Innov.IA"
+  },
+  "palette": {
+    "violet": "#A78BFA",
+    "cyan": "#22D3EE",
+    "indigo": "#818CF8",
+    "white": "#FFFFFF",
+    "backgroundHsl": "240 10% 4%",
+    "cardHsl": "240 8% 8%"
+  },
+  "typography": {
+    "body": "Inter",
+    "display": "Space Grotesk"
+  },
+  "assets": {
+    "lockedLogo": {
+      "url": "https://media.base44.com/images/public/6a0448473bebffcc3578f3b8/202e09753_logo-phoenix-512.png",
+      "config": "src/lib/brandLogo.js"
+    }
+  },
+  "agentPolicy": {
+    "mode": "fail-closed",
+    "readOrder": [
+      "brand/brand.manifest.json",
+      "brand/BRAND_ADN.md",
+      "src/index.css",
+      "src/lib/brandLogo.js"
+    ],
+    "forbidden": [
+      "generate-logo",
+      "replace-locked-logo",
+      "treat-client-qr-colors-as-app-brand",
+      "use-corporate-jsinnovia-palette-as-qr-ui"
+    ],
+    "qualityGate": [
+      "locked-logo-source-used",
+      "qr-app-palette-used",
+      "custom-qr-style-separated-from-app-brand",
+      "no-cross-brand-contamination"
+    ]
+  }
+}
